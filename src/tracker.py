@@ -10,7 +10,7 @@ def scrape_news_titles_and_links(url):
     
     try:
         r = requests.get(url, headers=headers, timeout=10)
-        r.raise_for_status()  # Rzuci wyjątek, jeśli kod odpowiedzi to np. 404 lub 500
+        r.raise_for_status()  
     except requests.RequestException as e:
         print(f"Błąd pobierania strony: {e}")
         return []
