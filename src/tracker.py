@@ -1,5 +1,4 @@
 from bs4 import BeautifulSoup
-import numpy as np
 import requests
 from src.models import Article
 
@@ -8,8 +7,13 @@ def scrape_news_titles_and_links(url):
     headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'
         }
-    r = requests.get(url, headers=headers)
     
+    try:
+        r = requests.get(url, headers=headers, timeout=10)
+        r.raise_for_status()  # Rzuci wyjątek, jeśli kod odpowiedzi to np. 404 lub 500
+    except requests.RequestException as e:
+        print(f"Błąd pobierania strony: {e}")
+        return []
 
     soup = BeautifulSoup(r.text, 'html.parser')
     articles = soup.find_all('article', class_='l-post grid-post grid-base-post', limit=6)
