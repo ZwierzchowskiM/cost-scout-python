@@ -1,8 +1,8 @@
 # main.py
 
-from src.tracker import get_prices_by_link
+from src.tracker import scrape_news_titles_and_links
 
-LINK = "https://www.ebay.pl/sch/i.html?_nkw=samsung+s24+ultra&_sacat=0&_from=R40&_trksid=p4582968.m570.l1311"
+LINK = "https://bedroomproducersblog.com/"
 
 if __name__ == "__main__":
-    get_prices_by_link(LINK)
+    scrape_news_titles_and_links(LINK)
