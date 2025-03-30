@@ -9,15 +9,20 @@ def scrape_news_titles_and_links(url):
 }
     r = requests.get(url, headers=headers)
     
-    # Parsuj stronę za pomocą BeautifulSoup
+
     soup = BeautifulSoup(r.text, 'html.parser')
-    print (soup)
-    # Znajdź wszystkie elementy <h2> z klasą 'is-title post-title'
-    articles = soup.find_all('h2', class_='is-title post-title', limit=6)
+    articles = soup.find_all('article', class_='l-post grid-post grid-base-post', limit=6)
     
-    # Iteruj przez znalezione elementy i wyodrębnij tytuł i link
     for article in articles:
-        title = article.get_text(strip=True)
-        link = article.find('a')['href']
+        # Pobierz tytuł i link
+        title_tag = article.find('h2', class_='is-title post-title')
+        title = title_tag.get_text(strip=True)
+        link = title_tag.find('a')['href']
+
+        # Pobierz datę
+        date_tag = article.find('time', class_='post-date')
+        date = date_tag.get_text(strip=True) if date_tag else 'Brak daty'
+
         print(f"Tytuł: {title}")
-        print(f"Link: {link}\n")
+        print(f"Link: {link}")
+        print(f"Data: {date}\n")
