@@ -29,17 +29,14 @@ def check_app_status():
 
 def main():
     
-    flask_thread = threading.Thread(target=start_flask)
-    flask_thread.daemon = True 
-    flask_thread.start()
-
     print("App start")
     flask_thread = threading.Thread(target=start_flask)
     flask_thread.start()
 
 
-    schedule.every().day.at("05:30").do(job)
-    schedule.every(1).minutes.do(check_app_status)
+    #schedule.every().day.at("05:30").do(job)
+    schedule.every(2).minutes.do(job)
+    schedule.every(2).minutes.do(check_app_status)
     
     while True:
         schedule.run_pending()
