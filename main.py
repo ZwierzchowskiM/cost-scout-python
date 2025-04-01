@@ -14,7 +14,7 @@ def job():
     url = "https://bedroomproducersblog.com/"
     articles = scrape_news_titles_and_links(url)
 
-    recipient_email = 'mzwierzchowski.chatgpt@gmail.com'
+    recipient_email = 'mazvi.music@gmail.com'
     send_email('Daily News Update', articles, recipient_email)
 
 def check_app_status():
@@ -34,8 +34,7 @@ def main():
     flask_thread.start()
 
 
-    #schedule.every().day.at("05:30").do(job)
-    schedule.every(2).minutes.do(job)
+    schedule.every().day.at("05:30").do(job)
     schedule.every(2).minutes.do(check_app_status)
     
     while True:

@@ -11,7 +11,7 @@ def authenticate_gmail():
 
     try:
         
-        load_dotenv()
+        #load_dotenv()
 
         client_id = os.getenv("GOOGLE_OAUTH2_CLIENT_ID")
         client_secret = os.getenv("GOOGLE_OAUTH2_CLIENT_SECRET")
@@ -36,7 +36,7 @@ def authenticate_gmail():
     
     except Exception as e:
         print(f"Błąd uwierzytelnienia Gmail API: {e}")
-        return None  # Można obsłużyć błąd w `send_email`
+        return None 
     
     
 def send_email(subject, articles, to_email):
