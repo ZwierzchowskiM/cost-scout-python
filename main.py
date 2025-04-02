@@ -19,7 +19,7 @@ def job():
 
 def check_app_status():
 
-    response = requests.get("http://localhost:8000/ping")
+    response = requests.get("https://news-title-bot.onrender.com/ping")
     if response.status_code == 200:
         print("App status: OK")
     else:
@@ -34,7 +34,7 @@ def main():
     flask_thread.start()
 
 
-    schedule.every().day.at("05:30").do(job)
+    schedule.every().day.at("10:30").do(job)
     schedule.every(2).minutes.do(check_app_status)
     
     while True:
